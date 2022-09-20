@@ -1,17 +1,4 @@
-# 王小美推送
-
-egg文档：https://www.eggjs.org/zh-CN/tutorials
-
-# 飞书测试群
-测试机器人webhook：https://open.feishu.cn/open-apis/bot/v2/hook/0e8bbdd3-0f14-48b3-b100-08a9e902ab74
-```bash
-curl -X POST -H "Content-Type: application/json" \
-	-d '{"msg_type":"text","content":{"text":"request example"}}' \
-  https://open.feishu.cn/open-apis/bot/v2/hook/0e8bbdd3-0f14-48b3-b100-08a9e902ab74
-```
-
-接入文档：https://open.feishu.cn/document/ukTMukTMukTM/ucTM5YjL3ETO24yNxkjN?lang=zh-CN
-
+# 王小美的推送
 
 ### 开发
 

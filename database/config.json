@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "wxmtest",
+    "password": "wxmpwd",
+    "database": "wxmpush",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "wxmtest",
+    "password": "wxmpwd",
+    "database": "wxmpush",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "wxmtest",
+    "password": "wxmpwd",
+    "database": "wxmpush",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

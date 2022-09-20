@@ -14,6 +14,10 @@ import 'egg-schedule';
 import 'egg-static';
 import 'egg-jsonp';
 import 'egg-view';
+import 'egg-view-nunjucks';
+import 'egg-validate';
+import 'egg-mysql';
+import 'egg-sequelize';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {
@@ -29,5 +33,9 @@ declare module 'egg' {
     static?: EggPluginItem;
     jsonp?: EggPluginItem;
     view?: EggPluginItem;
+    nunjucks?: EggPluginItem;
+    validate?: EggPluginItem;
+    mysql?: EggPluginItem;
+    sequelize?: EggPluginItem;
   }
 }
