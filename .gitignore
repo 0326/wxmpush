@@ -5,6 +5,7 @@ coverage/
 .idea/
 run/
 logs/
+docs/
 .DS_Store
 .vscode
 *.swp
