@@ -19,10 +19,20 @@ export default (appInfo: EggAppInfo) => {
   config.view = {
     defaultViewEngine: 'nunjucks',
     mapping: {
-      '.tpl': 'nunjucks',
+      '.njk': 'nunjucks',
     },
   };
 
+  config.security = {
+    csrf: {
+      enable: true,
+    },
+  };
+  config.cors = {};
+
+  config.validate = {
+    convert: true,
+  };
   // add your special config in here
   const bizConfig = {
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,

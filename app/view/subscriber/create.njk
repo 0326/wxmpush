@@ -1,0 +1,48 @@
+{% extends "layout.njk" %}
+
+{% block body %}
+<h1>新建订阅者 {{ time }}</h1>
+<form class="pure-form pure-form-aligned" id="j-subscriber-create-from">
+  <fieldset>
+    <div class="pure-control-group">
+      <label>订阅类型</label>
+      <label for="option-feishu" class="pure-radio">
+        <input id="option-feishu" type="radio" name="type" value="1" checked>
+        飞书
+      </label>
+      <label for="option-dingtalk" class="pure-radio">
+        <input id="option-dingtalk" type="radio" name="type" value="2">
+        钉钉
+      </label>
+    </div>
+
+    <div class="pure-control-group">
+      <label for="name">订阅名称</label>
+      <input name="name" class="pure-input-1-4" type="text" placeholder="取个名字吧，20字以内">
+    </div>
+    <div class="pure-control-group">
+      <label for="webhook">Webhook</label>
+      <input name="webhook" class="pure-input-1-4" type="text" placeholder="请复制对应 webhook 于此">
+    </div>
+
+    <div class="pure-controls">
+      <button type="submit" class="pure-button pure-button-primary">新建</button>
+      <p class="pure-red" id="j-subscriber-create-error"></p>
+    </div>
+  </fieldset>
+</form>
+<script>
+  submitForm('#j-subscriber-create-from', '/api/subscriber/create', function(res) {
+    var $tips =$('#j-subscriber-create-error');
+    if (res.success && res.data) {
+      $tips.css('color','green');
+      $tips.text('新建成功！');
+    } else {
+       $tips.css('color','red');
+      $('#j-subscriber-create-error').text(res.errorMsg);
+    }
+  }, function(error) {
+    console.error('submitFormError', error);
+  });
+</script>
+{% endblock %}

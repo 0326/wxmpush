@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang='zh'>
+<head>
+  <title>王小美的推送</title>
+  <meta name='keywords'>
+  <meta name='description'>
+  <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+  <link rel='shortcut icon' href='/favicon.ico' type='image/x-icon' />
+  <meta name='viewport' content='width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui'>
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" crossorigin="anonymous">
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script>
+    function submitForm(formId, url, success, error) {
+      var $form = $(formId);
+      if (!$form) return;
+
+      $form.submit(function(e) {
+        e.preventDefault();
+        $form.find('button[type=submit]').attr('disabled', 'disabled');
+
+        var dataArr = $form.serializeArray() || [];
+        var data = {};
+        dataArr.forEach(function(item) {
+          data[item.name] = item.value;
+        });
+
+        $.ajax({
+          url: url + '?_csrf=' + getCsrf(),
+          data: JSON.stringify(data),
+          method: 'POST',
+          contentType: 'application/json;charset=utf-8',
+          success,
+          error,
+          complete: function() {
+            $form.find('button[type=submit]').removeAttr('disabled');
+          },
+        });
+      });
+    }
+
+    function getCsrf() {
+      var keyValue = document.cookie.match('(^|;) ?csrfToken=([^;]*)(;|$)');
+      return keyValue ? keyValue[2] : null;
+    }
+  </script>
+</head>
+<body>
+    <header>
+    {% block header %}
+        This is the default header
+    {% endblock %}
+    </header>
+    <section>
+        {% block body %}{% endblock %}
+    </section>
+    <footer>
+    {% block footer %}
+        This is the default footer
+    {% endblock %}
+    </footer>
+</body>
+</html>

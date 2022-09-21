@@ -11,11 +11,11 @@ export default class Subscriber extends Service {
   }
 
 
-  public async create() {
+  public async create(name: string, type: number, webhook: string) {
     const result = await this.ctx.model.Subscriber.create({
-      name: 'auto',
-      webhook: 'xxxx',
-      type: 2,
+      name,
+      webhook,
+      type,
     });
     return result;
   }

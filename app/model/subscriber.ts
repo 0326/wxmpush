@@ -1,5 +1,3 @@
-'use strict';
-
 import { EggAppConfig } from 'egg';
 
 module.exports = (app: EggAppConfig) => {
@@ -7,7 +5,7 @@ module.exports = (app: EggAppConfig) => {
 
   const Subscriber = app.model.define('subscriber', {
     id: { type: INTEGER, primaryKey: true, autoIncrement: true },
-    name: STRING(45),
+    name: STRING(20),
     webhook: STRING(100),
     // creatorId: INTEGER,
     type: INTEGER,
