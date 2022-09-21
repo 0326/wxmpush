@@ -12,9 +12,9 @@ export function errorResHandler(errors: ValidateError[]) {
 
 export function successResHandler(data) {
   return {
-    data,
     errorMsg: null,
     errorCode: null,
+    data: data?.dataValues ? data.dataValues : data,
     success: true,
   };
 }
