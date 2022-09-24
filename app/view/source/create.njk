@@ -1,0 +1,52 @@
+{% extends "layout.njk" %}
+
+{% block body %}
+<h1>新建订阅源 {{ time }}</h1>
+<form class="pure-form pure-form-aligned" id="j-source-create-from">
+  <fieldset>
+    <div class="pure-control-group">
+      <label>源类型</label>
+      <label for="option-rss" class="pure-radio">
+        <input id="option-rss" type="radio" name="type" value="RSS" checked>
+        RSS
+      </label>
+      <label for="option-api" class="pure-radio">
+        <input id="option-api" type="radio" name="type" value="API">
+        API
+      </label>
+      <label for="option-other" class="pure-radio">
+        <input id="option-other" type="radio" name="type" value="API" disabled>
+        OTHER
+      </label>
+    </div>
+
+    <div class="pure-control-group">
+      <label for="name">源名称</label>
+      <input name="name" class="pure-input-1-4" type="text" placeholder="取个名字吧，20字以内">
+    </div>
+    <div class="pure-control-group">
+      <label for="source">源地址</label>
+      <input name="source" class="pure-input-1-4" type="text" placeholder="请输入订阅源地址">
+    </div>
+
+    <div class="pure-controls">
+      <button type="submit" class="pure-button pure-button-primary">新建</button>
+      <p class="pure-red" id="j-source-create-error"></p>
+    </div>
+  </fieldset>
+</form>
+<script>
+  submitForm('#j-source-create-from', '/api/source/create', function(res) {
+    var $tips =$('#j-source-create-error');
+    if (res.success && res.data) {
+      $tips.css('color','green');
+      $tips.text('新建成功！');
+    } else {
+       $tips.css('color','red');
+      $('#j-source-create-error').text(res.errorMsg);
+    }
+  }, function(error) {
+    console.error('submitFormError', error);
+  });
+</script>
+{% endblock %}

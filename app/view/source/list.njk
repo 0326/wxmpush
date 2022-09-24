@@ -1,0 +1,36 @@
+{% extends "layout.njk" %}
+
+{% block body %}
+<h1>订阅源列表 (共计{{ total }}条数据)</h1>
+<div>
+  <table class="pure-table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>type</th>
+            <th>name</th>
+            <th>creatorId</th>
+            <th>source</th>
+            <th>options</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for item in list %}
+      <tr class="{{ '' if loop.index%2 else 'pure-table-odd' }}">
+        <td>{{ item.id }}</td>
+        <td>{{ item.type }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.creatorId if item.creatorId else '系统创建' }}</td>
+        <td>{{ item.source }}</td>
+        <td><a href="/source/update?id={{item.id}}" target="_blank">编辑</a></td>
+      </tr>
+      {% else %}
+      <div>暂无数据</div>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<script>
+
+</script>
+{% endblock %}

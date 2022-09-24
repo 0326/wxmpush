@@ -1,8 +1,6 @@
 // https://github.com/eggjs/egg-validate
 // https://github.com/node-modules/parameter
-
-const RULE_STR_NUM = { type: 'string', required: false, format: /\d+/ };
-const RULE_NAME = { type: 'string', required: true, allowEmpty: false, max: 20 };
+import { RULE_STR_NUM, RULE_NAME } from './common';
 
 export const createSubscriber = {
   name: RULE_NAME,

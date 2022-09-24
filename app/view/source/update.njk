@@ -1,30 +1,34 @@
 {% extends "layout.njk" %}
 
 {% block body %}
-<h1>更新订阅者 {{ time }}</h1>
+<h1>更新订阅源 {{ time }}</h1>
 {% if data %}
-<form class="pure-form pure-form-aligned" id="j-subscriber-update-from">
+<form class="pure-form pure-form-aligned" id="j-source-update-from">
   <fieldset>
     <div class="pure-control-group">
       <input name="id" type="text" value="{{data.id}}" style="display: none;">
-      <label>订阅类型</label>
-      <label for="option-feishu" class="pure-radio">
-        <input id="option-feishu" type="radio" name="type" value="1" {{ 'checked' if data.type === 1 else '' }}>
-        飞书
+      <label>源类型</label>
+      <label for="option-rss" class="pure-radio">
+        <input id="option-rss" type="radio" name="type" value="RSS" {{ 'checked' if data.type === 'RSS' else '' }}>
+        RSS
       </label>
-      <label for="option-dingtalk" class="pure-radio">
-        <input id="option-dingtalk" type="radio" name="type" value="2" {{ 'checked' if data.type === 2 else '' }}>
-        钉钉
+      <label for="option-api" class="pure-radio">
+        <input id="option-api" type="radio" name="type" value="API" {{ 'checked' if data.type === 'API' else '' }}>
+        API
+      </label>
+      <label for="option-other" class="pure-radio">
+        <input id="option-other" type="radio" name="type" value="OTHER" {{ 'checked' if data.type === 'OTHER' else '' }}>
+        OTHER
       </label>
     </div>
 
     <div class="pure-control-group">
-      <label for="name">订阅名称</label>
+      <label for="name">源名称</label>
       <input name="name" class="pure-input-1-4" type="text" value="{{data.name}}">
     </div>
     <div class="pure-control-group">
-      <label for="webhook">Webhook</label>
-      <input name="webhook" class="pure-input-1-4" type="text" disabled value="{{data.webhook}}">
+      <label for="source">源地址</label>
+      <input name="source" class="pure-input-1-4" type="text" disabled value="{{data.source}}">
     </div>
 
     <div class="pure-controls">
@@ -32,21 +36,21 @@
       <a href="#j-delete-subsciber-modal" rel="modal:open">
         <button class="pure-button">删除</button>
       </a>
-      <p class="pure-red" id="j-subscriber-update-error"></p>
+      <p class="pure-red" id="j-source-update-error"></p>
     </div>
   </fieldset>
 </form>
 <div id="j-delete-subsciber-modal" class="modal">
   <h3>确定要删除吗？（不可恢复）</h3>
   <a href="#" rel="modal:close"><button type="submit" class="pure-button pure-button-primary">取消</button></a>
-  <button id="j-subscriber-delete" onclick="deleteAction()" class="pure-button">确定删除</button>
+  <button id="j-source-delete" onclick="deleteAction()" class="pure-button">确定删除</button>
 </div>
 {% else %}
 <div>参数错误，返回数据为空</div>
 {% endif %}
 <script>
-  submitForm('#j-subscriber-update-from', '/api/subscriber/update', function(res) {
-    var $tips =$('#j-subscriber-update-error');
+  submitForm('#j-source-update-from', '/api/source/update', function(res) {
+    var $tips =$('#j-source-update-error');
     if (res.success && res.data) {
       $tips.css('color','green');
       $tips.text('更新成功！');
@@ -55,7 +59,7 @@
       $tips.text('更新失败！参数错误。');
     } else {
       $tips.css('color','red');
-      $('#j-subscriber-update-error').text(res.errorMsg);
+      $('#j-source-update-error').text(res.errorMsg);
     }
   }, function(error) {
     console.error('submitFormError', error);
@@ -63,14 +67,14 @@
 
   function deleteAction() {
     $.ajax({
-      url: '/api/subscriber/delete?_csrf=' + getCsrf(),
+      url: '/api/source/delete?_csrf=' + getCsrf(),
       data: JSON.stringify({ id: $('input[name="id"]').val() }),
       method: 'POST',
       contentType: 'application/json;charset=utf-8',
       success: function(data) {
         if (data.data) {
           alert('删除成功');
-          window.location.replace('/subscriber/list');
+          window.location.replace('/source/list');
         } else {
           alert('未知错误，删除失败');
         }
