@@ -22,6 +22,15 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-cors',
   },
+  // https://www.eggjs.org/zh-CN/tutorials/passport
+  passport: {
+    enable: true,
+    package: 'egg-passport',
+  },
+  passportGithub: {
+    enable: true,
+    package: 'egg-passport-github',
+  },
 };
 
 export default plugin;
